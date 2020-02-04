@@ -1,2 +1,0 @@
-# restaurant
-Created with CodeSandbox
