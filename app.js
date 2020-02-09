@@ -2,12 +2,22 @@ var express = require("express");
 var app = express();
 // const ejsLint = require("ejs-lint");
 var bodyParser = require("body-parser");
-var mongoose = require("mongoose");
-
-mongoose.connect("mongodb://localhost/yelp_camp");
+// var mongoose = require("mongoose");
+var MongoClient = require("mongodb").MongoClient;
+// mongoose.connect("mongodb://localhost/yelp_camp");
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
+
+const uri =
+  "mongodb+srv://user:1234@cluster0-k18a8.mongodb.net/test?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true });
+client.connect(err => {
+  const collection = client.db("restaurant").collection("campgrounds");
+  // perform actions on the collection object
+  client.close();
+  console.log("connection successfull");
+});
 
 var campgrounds = [
   {
