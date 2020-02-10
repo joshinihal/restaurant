@@ -8,71 +8,108 @@ var MongoClient = require("mongodb").MongoClient;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
+var db;
+// var myobj = {
+//   name: "Shree Nidhi",
+//   image:
+//     "https://www.photosforclass.com/download/pixabay-1834784?webUrl=https%3A%2F%2Fpixabay.com%2Fget%2F57e8d6474d5aa814f6da8c7dda793f7f1636dfe2564c704c7d2f73d6964fcc58_960.jpg&user=Pexels"
+// };
 
 const uri =
   "mongodb+srv://user:1234@cluster0-k18a8.mongodb.net/test?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true });
+
 client.connect(err => {
-  const collection = client.db("restaurant").collection("campgrounds");
+  db = client.db("restaurant");
+  // const collection = db.collection("campgrounds", {
+
+  db.collection("campgrounds");
+  // collection.find({}).toArray(function(err, result) {
+  //   console.log("err is");
+  //   console.log(err);
+
+  //   console.log(result);
+  // });
   // perform actions on the collection object
+  // collection.insertMany(campgrounds, function(err, res) {
+  //   if (err) {
+  //     console.log(err);
+  //   } else {
+  //     console.log("all document inserted");
+  //     console.log(res.ops);
+  //   }
+  // });
   client.close();
   console.log("connection successfull");
 });
 
-var campgrounds = [
-  {
-    name: "Shree Nidhi",
-    image:
-      "https://www.photosforclass.com/download/pixabay-1834784?webUrl=https%3A%2F%2Fpixabay.com%2Fget%2F57e8d6474d5aa814f6da8c7dda793f7f1636dfe2564c704c7d2f73d6964fcc58_960.jpg&user=Pexels"
-  },
-  {
-    name: "Veg Saagar",
-    image:
-      "https://www.photosforclass.com/download/pixabay-768771?webUrl=https%3A%2F%2Fpixabay.com%2Fget%2F51e6dd444d53b108f5d084609620367d1c3ed9e04e507441752779d59544c5_960.jpg&user=Free-Photos"
-  },
-  {
-    name: "Navrang Veg",
-    image:
-      "https://www.photosforclass.com/download/pixabay-690975?webUrl=https%3A%2F%2Fpixabay.com%2Fget%2F50e9d54a4d57b108f5d084609620367d1c3ed9e04e507441752779d59544c5_960.jpg&user=Free-Photos"
-  },
-  {
-    name: "Shree Nidhi",
-    image:
-      "https://www.photosforclass.com/download/pixabay-1834784?webUrl=https%3A%2F%2Fpixabay.com%2Fget%2F57e8d6474d5aa814f6da8c7dda793f7f1636dfe2564c704c7d2f73d6964fcc58_960.jpg&user=Pexels"
-  },
-  {
-    name: "Veg Saagar",
-    image:
-      "https://www.photosforclass.com/download/pixabay-768771?webUrl=https%3A%2F%2Fpixabay.com%2Fget%2F51e6dd444d53b108f5d084609620367d1c3ed9e04e507441752779d59544c5_960.jpg&user=Free-Photos"
-  },
-  {
-    name: "Navrang Veg",
-    image:
-      "https://www.photosforclass.com/download/pixabay-690975?webUrl=https%3A%2F%2Fpixabay.com%2Fget%2F50e9d54a4d57b108f5d084609620367d1c3ed9e04e507441752779d59544c5_960.jpg&user=Free-Photos"
-  },
-  {
-    name: "Shree Nidhi",
-    image:
-      "https://www.photosforclass.com/download/pixabay-1834784?webUrl=https%3A%2F%2Fpixabay.com%2Fget%2F57e8d6474d5aa814f6da8c7dda793f7f1636dfe2564c704c7d2f73d6964fcc58_960.jpg&user=Pexels"
-  },
-  {
-    name: "Veg Saagar",
-    image:
-      "https://www.photosforclass.com/download/pixabay-768771?webUrl=https%3A%2F%2Fpixabay.com%2Fget%2F51e6dd444d53b108f5d084609620367d1c3ed9e04e507441752779d59544c5_960.jpg&user=Free-Photos"
-  },
-  {
-    name: "Navrang Veg",
-    image:
-      "https://www.photosforclass.com/download/pixabay-690975?webUrl=https%3A%2F%2Fpixabay.com%2Fget%2F50e9d54a4d57b108f5d084609620367d1c3ed9e04e507441752779d59544c5_960.jpg&user=Free-Photos"
-  }
-];
+// var campgrounds = [
+//   {
+//     name: "Shree Nidhi",
+//     image:
+//       "https://www.photosforclass.com/download/pixabay-1834784?webUrl=https%3A%2F%2Fpixabay.com%2Fget%2F57e8d6474d5aa814f6da8c7dda793f7f1636dfe2564c704c7d2f73d6964fcc58_960.jpg&user=Pexels"
+//   },
+//   {
+//     name: "Veg Saagar",
+//     image:
+//       "https://www.photosforclass.com/download/pixabay-768771?webUrl=https%3A%2F%2Fpixabay.com%2Fget%2F51e6dd444d53b108f5d084609620367d1c3ed9e04e507441752779d59544c5_960.jpg&user=Free-Photos"
+//   },
+//   {
+//     name: "Navrang Veg",
+//     image:
+//       "https://www.photosforclass.com/download/pixabay-690975?webUrl=https%3A%2F%2Fpixabay.com%2Fget%2F50e9d54a4d57b108f5d084609620367d1c3ed9e04e507441752779d59544c5_960.jpg&user=Free-Photos"
+//   },
+//   {
+//     name: "Shree Nidhi",
+//     image:
+//       "https://www.photosforclass.com/download/pixabay-1834784?webUrl=https%3A%2F%2Fpixabay.com%2Fget%2F57e8d6474d5aa814f6da8c7dda793f7f1636dfe2564c704c7d2f73d6964fcc58_960.jpg&user=Pexels"
+//   },
+//   {
+//     name: "Veg Saagar",
+//     image:
+//       "https://www.photosforclass.com/download/pixabay-768771?webUrl=https%3A%2F%2Fpixabay.com%2Fget%2F51e6dd444d53b108f5d084609620367d1c3ed9e04e507441752779d59544c5_960.jpg&user=Free-Photos"
+//   },
+//   {
+//     name: "Navrang Veg",
+//     image:
+//       "https://www.photosforclass.com/download/pixabay-690975?webUrl=https%3A%2F%2Fpixabay.com%2Fget%2F50e9d54a4d57b108f5d084609620367d1c3ed9e04e507441752779d59544c5_960.jpg&user=Free-Photos"
+//   },
+//   {
+//     name: "Shree Nidhi",
+//     image:
+//       "https://www.photosforclass.com/download/pixabay-1834784?webUrl=https%3A%2F%2Fpixabay.com%2Fget%2F57e8d6474d5aa814f6da8c7dda793f7f1636dfe2564c704c7d2f73d6964fcc58_960.jpg&user=Pexels"
+//   },
+//   {
+//     name: "Veg Saagar",
+//     image:
+//       "https://www.photosforclass.com/download/pixabay-768771?webUrl=https%3A%2F%2Fpixabay.com%2Fget%2F51e6dd444d53b108f5d084609620367d1c3ed9e04e507441752779d59544c5_960.jpg&user=Free-Photos"
+//   },
+//   {
+//     name: "Navrang Veg",
+//     image:
+//       "https://www.photosforclass.com/download/pixabay-690975?webUrl=https%3A%2F%2Fpixabay.com%2Fget%2F50e9d54a4d57b108f5d084609620367d1c3ed9e04e507441752779d59544c5_960.jpg&user=Free-Photos"
+//   }
+// ];
 
 app.get("/", function(req, res) {
   res.render("landing");
 });
 
 app.get("/campgrounds", function(req, res) {
-  res.render("campgrounds", { campgrounds: campgrounds });
+  // const db = client.db("restaurant");
+  // const collection = db.collection("campgrounds", {
+  //   name: String,
+  //   image: String
+  // });
+  db.collection("campgrounds")
+    .find({})
+    .toArray(function(err, result) {
+      console.log("err is");
+      console.log(err);
+      console.log(result);
+    });
+  client.close();
+  // res.render("campgrounds", { campgrounds: campgrounds });
 });
 
 app.post("/campgrounds", function(req, res) {
