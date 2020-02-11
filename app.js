@@ -5,42 +5,45 @@ var bodyParser = require("body-parser");
 // var mongoose = require("mongoose");
 var MongoClient = require("mongodb").MongoClient;
 // mongoose.connect("mongodb://localhost/yelp_camp");
-
+var assert = require("assert");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
-var db;
+
 // var myobj = {
 //   name: "Shree Nidhi",
 //   image:
 //     "https://www.photosforclass.com/download/pixabay-1834784?webUrl=https%3A%2F%2Fpixabay.com%2Fget%2F57e8d6474d5aa814f6da8c7dda793f7f1636dfe2564c704c7d2f73d6964fcc58_960.jpg&user=Pexels"
 // };
 
+// const uri =
+//   "mongodb+srv://user:1234@cluster0-k18a8.mongodb.net/test?retryWrites=true&w=majority";
+// const client = new MongoClient(uri, { useNewUrlParser: true });
+// client.connect(err => {
+//   const db = client.db("restaurant");
+//   const collection = db.collection("campgrounds", {
+//     name: String,
+//     image: String
+//   });
+//   client.close();
+//   console.log("connection successfull");
+// });
+var mycollection;
+var mydb;
 const uri =
   "mongodb+srv://user:1234@cluster0-k18a8.mongodb.net/test?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true });
-
 client.connect(err => {
-  db = client.db("restaurant");
-  // const collection = db.collection("campgrounds", {
-
-  db.collection("campgrounds");
-  // collection.find({}).toArray(function(err, result) {
-  //   console.log("err is");
-  //   console.log(err);
-
-  //   console.log(result);
-  // });
+  mydb = client.db("restaurant");
+  const collection = client.db("restaurant").collection("campgrounds");
   // perform actions on the collection object
-  // collection.insertMany(campgrounds, function(err, res) {
-  //   if (err) {
-  //     console.log(err);
-  //   } else {
-  //     console.log("all document inserted");
-  //     console.log(res.ops);
-  //   }
-  // });
-  client.close();
-  console.log("connection successfull");
+  if (err) {
+    console.log(err);
+  } else {
+    console.log("connection successfull");
+    // console.log(collection);
+    mycollection = collection;
+  }
+  // client.close();
 });
 
 // var campgrounds = [
@@ -96,19 +99,20 @@ app.get("/", function(req, res) {
 });
 
 app.get("/campgrounds", function(req, res) {
-  // const db = client.db("restaurant");
-  // const collection = db.collection("campgrounds", {
-  //   name: String,
-  //   image: String
-  // });
-  db.collection("campgrounds")
+  // console.log(mycollection);
+  // mycollection("campgrounds").find()
+  mydb
+    .collection("campgrounds")
     .find({})
     .toArray(function(err, result) {
-      console.log("err is");
-      console.log(err);
-      console.log(result);
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(result);
+      }
+      // if you close here, server wont be available in the routes so keep the connection open
+      // db.close();
     });
-  client.close();
   // res.render("campgrounds", { campgrounds: campgrounds });
 });
 
