@@ -22,7 +22,7 @@ app.set("view engine", "ejs");
 // var mycollection;
 
 const uri =
-  "mongodb+srv://user:1234@cluster0-k18a8.mongodb.net/test?retryWrites=true&w=majority";
+  "";
 
 mongoose.connect(uri, { useNewUrlParser: true });
 
