@@ -22,7 +22,7 @@ var mydb;
 // var mycollection;
 
 const uri =
-  "mongodb+srv://user:1234@cluster0-k18a8.mongodb.net/test?retryWrites=true&w=majority";
+  "";
 const client = new MongoClient(uri, { useNewUrlParser: true });
 client.connect(err => {
   mydb = client.db("restaurant");
